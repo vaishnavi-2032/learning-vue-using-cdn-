@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning vue</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+    <style>
+        .box{
+            padding: 100px 0;
+            width: 400px;
+            text-align: center;
+            background: #ddd;
+            margin: 20px;
+            display: inline-block;
+        }
+        body{
+            background: #eee;
+            max-width: 960px;
+            margin: 20px auto;
+        }
+        p,h3,ul{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style-type: none;
+            background: #fff;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        li.fav{
+            background: #ff9ed2;
+            color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello,vue</h1>
+
+    <div id="app">
+        <!-- v-bind makes href attribute dynamic this is known as attribute binding -->
+        <!-- instead of v-bind: only : symbol is enough -->
+        <a :href="url">Best Website ever</a>
+        <!-- in double curly braces the property that i want to output -->
+        <div v-if="showbooks">
+            <ul>
+                <!-- based on dynamic classes here fav is class that will applied to li if and only if isfav is true -->
+                <li v-for="book in filteredbooks" :class="{fav: book.isfav}" @click="togglefav(book)">
+                    <img :src="book.img" :alt="book.title">
+                    <h3>{{ book.title }}</h3>
+                    <p>{{ book.author }}</p>
+                </li>
+            </ul>
+        </div>
+    
+        <button @click="toggleshowbooks">
+            <span v-if="showbooks">Hide Books</span>
+            <span v-else>Show Books</span>
+
+        </button>
+
+
+        <!-- <div v-show="showbooks">
+            currently showing books
+        </div> -->
+
+        <br>
+        <!-- mouse events -->
+        <!-- $event means our first argument is e -->
+        <div class="box" @mouseover="handleEvent($event,5)">Mouseover (enter)</div>
+        <div class="box" @mouseleave="handleEvent">Mouseleave</div>
+        <div class="box" @dblclick="handleEvent">Double click</div>
+        <div class="box" @mousemove="handlemousemove">Position - {{x}} {{y}}</div>
+
+
+        <!-- v-on is directive which react to different type of events. after colon there is click so here we are reacting to click event -->
+        <!-- v-on: has shortcut @ -->
+        <!-- <div v-on:click="age++">Increase age</div>
+        <button @click="age--">Decrease age</button>
+        <button @click="changetitle('passed title')">Change title</button> -->
+
+    </div>
+
+
+    <script src="app.js"></script>
+</body>
+</html>
